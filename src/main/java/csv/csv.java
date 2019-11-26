@@ -36,7 +36,6 @@ public class csv {
             }
             System.out.println("结束:"+i);
         } catch (Exception e) {
-//            LogUtils.error(e.getMessage(), e);
             e.printStackTrace();
         }
 
