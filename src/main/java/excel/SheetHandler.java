@@ -169,21 +169,8 @@ public class  SheetHandler extends DefaultHandler {
                             curCol++;
                         }
                     }
-                    //拼接一行的数据
-                    for(int i=0;i<rowlist.size();i++){
-                        if(rowlist.get(i).contains(",")){
-                            value += "\""+rowlist.get(i)+"\",";
-                        }else{
-                            value += rowlist.get(i)+",";
-                        }
-                    }
-                    //加换行符
-                    value += "\n";
-                    try {
-                        writer.write(value);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    //处理每一行的数据
+                    dealexcelData(rowlist);
                     curRow++;
                     //一行的末尾重置一些数据
                     rowlist.clear();
@@ -245,10 +232,28 @@ public class  SheetHandler extends DefaultHandler {
             }
             return str;
         }
+        public void dealexcelData(List<String> rowlist){
+            String value ="";
+            //拼接一行的数据
+            for(int i=0;i<rowlist.size();i++){
+                if(rowlist.get(i).contains(",")){
+                    value += "\""+rowlist.get(i)+"\",";
+                }else{
+                    value += rowlist.get(i)+",";
+                }
+            }
+            //加换行符
+            value += "\n";
+            try {
+                writer.write(value);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     public static void main(String[] args) throws Exception {
         SheetHandler example = new SheetHandler();
         String str = "Book1";
-        String filename = "C:\\Users\\mingzhihong\\Desktop\\map数据.xlsx";
+        String filename = "C:\\Users\\mingzhihong\\Desktop\\map1.xlsx";
         System.out.println("-- 程序开始 --");
         long time_1 = System.currentTimeMillis();
         try{
